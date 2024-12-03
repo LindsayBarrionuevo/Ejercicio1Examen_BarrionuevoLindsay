@@ -68,44 +68,68 @@ class _RealizarOperacionesPage extends State<RealizarOperacionesPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Calculadora de Operaciones'),
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.purple.shade400,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Text(
-              'Ingresa dos números enteros para realizar operaciones matemáticas:',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-              textAlign: TextAlign.center,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromARGB(167, 199, 144, 209),
+              Color.fromARGB(167, 179, 120, 189),
+              Color.fromARGB(167, 90, 33, 100),
+            ],
+          ),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text(
+                  'Ingresa dos números enteros para realizar operaciones matemáticas:',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+                _buildInputField(
+                  controller: _num1Controller,
+                  label: 'Número 1',
+                  icon: Icons.filter_1,
+                ),
+                const SizedBox(height: 16),
+                _buildInputField(
+                  controller: _num2Controller,
+                  label: 'Número 2',
+                  icon: Icons.filter_2,
+                ),
+                const SizedBox(height: 32),
+                ElevatedButton.icon(
+                  onPressed: _calcularYMostrarResultados,
+                  icon: const Icon(Icons.calculate, size: 24),
+                  label: const Text('Calcular y Ver Resultados'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purple.shade400,
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    textStyle: const TextStyle(fontSize: 18),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+              ],
             ),
-            const SizedBox(height: 20),
-            _buildInputField(
-              controller: _num1Controller,
-              label: 'Número 1',
-              icon: Icons.filter_1,
-            ),
-            const SizedBox(height: 16),
-            _buildInputField(
-              controller: _num2Controller,
-              label: 'Número 2',
-              icon: Icons.filter_2,
-            ),
-            const SizedBox(height: 32),
-            ElevatedButton.icon(
-              onPressed: _calcularYMostrarResultados,
-              icon: const Icon(Icons.calculate, size: 24),
-              label: const Text('Calcular y Ver Resultados'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.teal,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                textStyle: const TextStyle(fontSize: 18),
-              ),
-            ),
-            const SizedBox(height: 16),
-
-          ],
+          ),
         ),
       ),
     );
@@ -119,18 +143,21 @@ class _RealizarOperacionesPage extends State<RealizarOperacionesPage> {
     return TextField(
       controller: controller,
       keyboardType: TextInputType.number,
+      style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         labelText: label,
-        prefixIcon: Icon(icon, color: Colors.teal),
+        labelStyle: const TextStyle(color: Colors.white),
+        prefixIcon: Icon(icon, color: Colors.white),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.white),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: Colors.teal, width: 2),
+          borderSide: const BorderSide(color: Colors.purple, width: 2),
           borderRadius: BorderRadius.circular(12),
         ),
         filled: true,
-        fillColor: Colors.teal.withOpacity(0.05),
+        fillColor: Colors.purple.shade200!.withOpacity(0.5),
       ),
     );
   }

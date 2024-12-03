@@ -10,9 +10,20 @@ class ResultadosPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Resultados'),
-        backgroundColor: Colors.teal,
+        backgroundColor: Color.fromARGB(167, 90, 33, 100),
       ),
-      body: Padding(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(167, 199, 144, 209),
+              Color.fromARGB(167, 179, 120, 189),
+              Color.fromARGB(167, 90, 33, 100),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -20,8 +31,9 @@ class ResultadosPage extends StatelessWidget {
             const Text(
               'Resultados de las Operaciones',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
+                color: Colors.white,
               ),
               textAlign: TextAlign.center,
             ),
@@ -29,29 +41,36 @@ class ResultadosPage extends StatelessWidget {
             Expanded(
               child: ListView.separated(
                 itemCount: resultados.length,
-                separatorBuilder: (context, index) => const Divider(),
+                separatorBuilder: (context, index) => const Divider(
+                  color: Colors.white,
+                  height: 1,
+                ),
                 itemBuilder: (context, index) {
                   final key = resultados.keys.elementAt(index);
                   final value = resultados[key];
 
                   return Card(
-                    elevation: 3,
+                    elevation: 5,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
+                    color: Colors.purple.shade50,
                     child: ListTile(
                       leading: Icon(
                         _getIconForKey(key),
-                        color: Colors.teal,
+                        color: Colors.deepPurple,
                         size: 30,
                       ),
                       title: Text(
                         key,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.deepPurple,
+                        ),
                       ),
                       subtitle: Text(
                         value.toString(),
-                        style: const TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 16, color: Colors.black87),
                       ),
                     ),
                   );
@@ -64,7 +83,6 @@ class ResultadosPage extends StatelessWidget {
     );
   }
 
-  // Método para elegir íconos basados en la operación
   IconData _getIconForKey(String key) {
     switch (key.toLowerCase()) {
       case "suma":
